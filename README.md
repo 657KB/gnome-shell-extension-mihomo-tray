@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="Meta.png" alt="Meta Kennel" width="200">
+  <img src="Meta.png" alt="Meta" width="200">
   <br>Mihomo Tray<br>
 </h1>
 
