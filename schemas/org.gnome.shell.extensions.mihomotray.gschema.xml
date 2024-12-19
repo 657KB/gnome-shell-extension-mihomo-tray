@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.mihomotray" path="/org/gnome/shell/extensions/mihomotay/">
+    <key name="external-controller" type="s">
+      <default>"http://localhost:9090"</default>
+    </key>
+    <key name="metacubexd-url" type="s">
+      <default>"https://d.metacubex.one"</default>
+    </key>
+  </schema>
+</schemalist>

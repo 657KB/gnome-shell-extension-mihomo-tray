@@ -1,0 +1,10 @@
+{
+  "name": "Mihomo Tray",
+  "description": "TODO",
+  "uuid": "mihomotray@kuyermqi",
+  "url": "https://github.com/657KB/gnome-shell-extension-mihomo-tray",
+  "shell-version": [
+    "47"
+  ],
+  "settings-schema": "org.gnome.shell.extensions.mihomotray"
+}
