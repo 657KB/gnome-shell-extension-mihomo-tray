@@ -1,6 +1,6 @@
 {
   "name": "Mihomo Tray",
-  "description": "TODO",
+  "description": "A gnome shell extension that creates an indicator in the top bar for easily controlling Mihomo.",
   "uuid": "mihomotray@kuyermqi",
   "url": "https://github.com/657KB/gnome-shell-extension-mihomo-tray",
   "shell-version": [
