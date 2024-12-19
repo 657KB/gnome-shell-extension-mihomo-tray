@@ -22,31 +22,60 @@ class Indicator extends PanelMenu.Button {
     if (settings !== null) {
       this._externalController = settings.get_string('external-controller') || null
       this._metacubexdUrl = settings.get_string('metacubexd-url') || null
-      settings.connect('changed::external-controller', (settings, key) => {
+      this._handlerId0 = settings.connect('changed::external-controller', (settings, key) => {
         this._indicator._externalController = settings.get_string(key) || null
       })
-      settings.connect('changed::metacubexd-url', (settings, key) => {
+      this._handlerId1 = settings.connect('changed::metacubexd-url', (settings, key) => {
         this._indicator._metacubexdUrl = settings.get_string(key) || null
       })
     }
 
     const prefItem = new PopupMenu.PopupMenuItem('Preferences')
-    prefItem.connect('activate', () => this.openPrefs())
+    this._handlerId2 = prefItem.connect('activate', () => this.openPrefs())
     this.menu.addMenuItem(prefItem)
 
     const separator = new PopupMenu.PopupSeparatorMenuItem()
     this.menu.addMenuItem(separator)
 
     const openMetacubeXDItem = new PopupMenu.PopupMenuItem('Open MetacubeXD')
-    openMetacubeXDItem.connect('activate', () => this._openMetacubeXD())
+    this._handlerId3 = openMetacubeXDItem.connect('activate', () => this._openMetacubeXD())
     this.menu.addMenuItem(openMetacubeXDItem)
 
     const reloadItem = new PopupMenu.PopupMenuItem('Reload Configuration')
-    reloadItem.connect('activate', () => this._reloadConfiguration())
+    this._handlerId4 = reloadItem.connect('activate', () => this._reloadConfiguration())
     this.menu.addMenuItem(reloadItem)
 
     this._httpSession = new Soup.Session()
     this._fetchConfigs()
+    
+    this.cleanSignals = () => {
+      if (settings) {
+        if (this._handlerId0) {
+          settings.disconnect(this._handlerId0)
+          this._handlerId0 = null
+        }
+        if (this._handlerId1) {
+          settings.disconnect(this._handlerId1)
+          this._handlerId1 = null
+        }
+      }
+      if (prefItem && this._handlerId2) {
+        prefItem.disconnect(this._handlerId2)
+        this._handlerId2 = null
+      }
+      if (openMetacubeXDItem && this._handlerId3) {
+        openMetacubeXDItem.disconnect(this._handlerId3)
+        this._handlerId3 = null
+      }
+      if (openMetacubeXDItem && this._handlerId4) {
+        openMetacubeXDItem.disconnect(this._handlerId4)
+        this._handlerId4 = null
+      }
+      if (this._allowLanItem && this._handlerId5) {
+        this._allowLanItem.disconnect(this._handlerId5)
+        this._handlerId5 = null
+      }
+    }
   }
 
   _fetch({ method, url, resolve, reject = console.error, body = null }) {
@@ -82,18 +111,18 @@ class Indicator extends PanelMenu.Button {
         const items = []
 
         if (configs.hasOwnProperty('allow-lan')) {
-          const item = new PopupMenu.PopupMenuItem('Allow Lan: ' + (configs['allow-lan'] ? 'ON' : 'OFF'))
+          this._allowLanItem = new PopupMenu.PopupMenuItem('Allow Lan: ' + (configs['allow-lan'] ? 'ON' : 'OFF'))
           const onAllowLanChanged = value => {
-            item.label.text = 'Allow Lan: ' + (value ? 'ON' : 'OFF')
+            this._allowLanItem.label.text = 'Allow Lan: ' + (value ? 'ON' : 'OFF')
             configs['allow-lan'] = value
           }
-          item.connect('activate', () => this._changeAllowLan(!configs['allow-lan'], onAllowLanChanged))
-          items.push(item)
+          this._handlerId5 = this._allowLanItem.connect('activate', () => this._changeAllowLan(!configs['allow-lan'], onAllowLanChanged))
+          items.push(this._allowLanItem)
         }
 
         if (configs.hasOwnProperty('mode')) {
           const item = new PopupMenu.PopupSubMenuMenuItem('Mode: ' + configs['mode'].toUpperCase())
-          const onModeChanged = newMode => { item.label.text = 'Mode: ' + newMode }
+          const onModeChanged = newMode => { item.label.text = 'Mode: ' + newMode.toUpperCase() }
           item.menu.addAction('GLOBAL', () => this._changeMode('Global', onModeChanged))
           item.menu.addAction('RULE', () => this._changeMode('Rule', onModeChanged))
           item.menu.addAction('DIRECT', () => this._changeMode('Direct', onModeChanged))
@@ -108,7 +137,7 @@ class Indicator extends PanelMenu.Button {
         items.forEach(item => this.menu.addMenuItem(item))
       },
       reject: err => {
-        console.error(`\n\n${err}\n\n`)
+        console.error(err)
         Main.notify('Mihomo Tray', 'Failed to fetch configs, please check the status of mihomo service.')
       }
     })
@@ -116,7 +145,7 @@ class Indicator extends PanelMenu.Button {
 
   _openMetacubeXD() {
     if (!this._metacubexdUrl) {
-      console.error('\n\nmetacubexd url is null\n\n')
+      console.error('metacubexd url is null')
       return
     }
     try {
@@ -128,7 +157,7 @@ class Indicator extends PanelMenu.Button {
 
   _changeMode(mode, onSuccess) {
     if (this._externalController === null) {
-      console.error('\n\external controller is null\n\n')
+      console.error('external controller is null')
       return
     }
     this._fetch({
@@ -166,12 +195,11 @@ class Indicator extends PanelMenu.Button {
         Main.notify('Mihomo Tray', `Configuration reloded.`)
       },
       reject: (err) => {
+        console.error(err)
         Main.notify('Mihomo Tray', `Failed to relod configuration.`)
       },
     })
   }
-
-  openPrefs() {}
 
   destroyHttpSession() {
     if (this._httpSession) {
@@ -195,6 +223,9 @@ export default class IndicatorExampleExtension extends Extension {
   }
 
   disable() {
+    if (this._indicator.cleanSignals) {
+      this._indicator.cleanSignals()
+    }
     this._indicator.destroyHttpSession()
     this._indicator.destroy()
     this._indicator = null
