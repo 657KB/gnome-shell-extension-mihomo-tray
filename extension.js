@@ -23,10 +23,10 @@ class Indicator extends PanelMenu.Button {
       this._externalController = settings.get_string('external-controller') || null
       this._metacubexdUrl = settings.get_string('metacubexd-url') || null
       this._handlerId0 = settings.connect('changed::external-controller', (settings, key) => {
-        this._indicator._externalController = settings.get_string(key) || null
+        this._externalController = settings.get_string(key) || null
       })
       this._handlerId1 = settings.connect('changed::metacubexd-url', (settings, key) => {
-        this._indicator._metacubexdUrl = settings.get_string(key) || null
+        this._metacubexdUrl = settings.get_string(key) || null
       })
     }
 
