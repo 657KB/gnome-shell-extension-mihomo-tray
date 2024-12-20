@@ -173,7 +173,7 @@ class Indicator extends PanelMenu.Button {
 
   _changeAllowLan(allowLan, onSuccess) {
     if (this._externalController === null) {
-      console.error('\n\external controller is null\n\n')
+      console.error('external controller is null')
       return
     }
     this._fetch({
@@ -209,7 +209,7 @@ class Indicator extends PanelMenu.Button {
   }
 }
 
-export default class IndicatorExampleExtension extends Extension {
+export default class MihomoTrayExtension extends Extension {
   enable() {
     settings = this.getSettings('org.gnome.shell.extensions.mihomotray')
     
