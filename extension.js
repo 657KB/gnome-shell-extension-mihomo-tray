@@ -21,11 +21,11 @@ class Indicator extends PanelMenu.Button {
 
     if (settings !== null) {
       this._externalController = settings.get_string('external-controller') || null
-      this._metacubexdUrl = settings.get_string('metacubexd-url') || null
+      this._metacubexdUrl = settings.get_string('dashboard-url') || null
       this._handlerId0 = settings.connect('changed::external-controller', (settings, key) => {
         this._externalController = settings.get_string(key) || null
       })
-      this._handlerId1 = settings.connect('changed::metacubexd-url', (settings, key) => {
+      this._handlerId1 = settings.connect('changed::dashboard-url', (settings, key) => {
         this._metacubexdUrl = settings.get_string(key) || null
       })
     }
@@ -37,7 +37,7 @@ class Indicator extends PanelMenu.Button {
     const separator = new PopupMenu.PopupSeparatorMenuItem()
     this.menu.addMenuItem(separator)
 
-    const openMetacubeXDItem = new PopupMenu.PopupMenuItem('Open MetacubeXD')
+    const openMetacubeXDItem = new PopupMenu.PopupMenuItem('Open Dashboard')
     this._handlerId3 = openMetacubeXDItem.connect('activate', () => this._openMetacubeXD())
     this.menu.addMenuItem(openMetacubeXDItem)
 
@@ -47,7 +47,7 @@ class Indicator extends PanelMenu.Button {
 
     this._httpSession = new Soup.Session()
     this._fetchConfigs()
-    
+
     this.cleanSignals = () => {
       if (settings) {
         if (this._handlerId0) {
@@ -145,7 +145,7 @@ class Indicator extends PanelMenu.Button {
 
   _openMetacubeXD() {
     if (!this._metacubexdUrl) {
-      console.error('metacubexd url is null')
+      console.error('dashboard url is null')
       return
     }
     try {
@@ -212,7 +212,7 @@ class Indicator extends PanelMenu.Button {
 export default class MihomoTrayExtension extends Extension {
   enable() {
     settings = this.getSettings('org.gnome.shell.extensions.mihomotray')
-    
+
     const clashIcon = new St.Icon({ gicon: Gio.icon_new_for_string(this.metadata.path + '/clash.svg') })
     clashIcon.set_icon_size(16)
     this._indicator = new Indicator()

@@ -27,12 +27,12 @@ export default class MihomoTrayPreferences extends ExtensionPreferences {
     group1.add(input1)
     const btn1 = new Adw.ButtonRow({ title: 'Reset' })
     btn1.connect('activated', () => {
-      window._settings.set_string('metacubexd-url', 'https://d.metacubex.one')
+      window._settings.set_string('dashboard-url', 'https://d.metacubex.one')
     })
     group1.add(btn1)
 
     window._settings = this.getSettings('org.gnome.shell.extensions.mihomotray')
     window._settings.bind('external-controller', input0, 'text', Gio.SettingsBindFlags.DEFAULT)
-    window._settings.bind('metacubexd-url', input1, 'text', Gio.SettingsBindFlags.DEFAULT)
+    window._settings.bind('dashboard-url', input1, 'text', Gio.SettingsBindFlags.DEFAULT)
   }
 }
