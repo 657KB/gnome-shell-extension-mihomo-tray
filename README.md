@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="Meta.png" alt="Meta" width="200">
+  <img src="images/Meta.png" alt="Meta" width="200">
   <br>Mihomo Tray<br>
 </h1>
 
@@ -21,4 +21,4 @@ You need to configure the [external-controller](https://wiki.metacubex.one/en/co
 
 ## Screenshot
 
-![Screenshot](/screenshot.png)
+![Screenshot](images//screenshot.png)
