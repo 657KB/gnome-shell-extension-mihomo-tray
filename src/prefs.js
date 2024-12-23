@@ -23,7 +23,7 @@ export default class MihomoTrayPreferences extends ExtensionPreferences {
 
     const group1 = new Adw.PreferencesGroup()
     page.add(group1)
-    const input1 = new Adw.EntryRow({ title: 'MetacubeXD URL' })
+    const input1 = new Adw.EntryRow({ title: 'Dashboard URL' })
     group1.add(input1)
     const btn1 = new Adw.ButtonRow({ title: 'Reset' })
     btn1.connect('activated', () => {
