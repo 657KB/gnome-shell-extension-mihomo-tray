@@ -1,2 +1,2 @@
 # !/bin/bash
-zip -r mihomotray@kuyermqi.zip schemas/ clash.svg extension.js metadata.json prefs.js
+zip -r mihomotray@kuyermqi.zip schemas/ clash.svg extension.js metadata.json prefs.js locale/

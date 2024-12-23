@@ -16,7 +16,7 @@
 You need to configure the [external-controller](https://wiki.metacubex.one/en/config/general/#external-control-api) to allow this extension to control Mihomo. 
 
 ## TODO
-- [ ] i18n
+- [x] i18n
 - [ ] switch proxy
 
 ## Screenshot

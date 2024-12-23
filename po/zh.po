@@ -1,0 +1,57 @@
+#
+# kuyermqi <kuyermqi@outlook.com>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mihomotray@1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-12-23 14:52+0800\n"
+"PO-Revision-Date: 2024-12-23 15:25+0800\n"
+"Last-Translator: kuyermqi <kuyermqi@outlook.com>\n"
+"Language-Team: Chinese <kuyermqi@outlook.com>\n"
+"Language: zh-CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Gtranslator 47.1\n"
+
+#: extension.js:20 extension.js:141 extension.js:168 extension.js:184
+#: extension.js:195 extension.js:199
+msgid "Mihomo Tray"
+msgstr "Mihomo Tray"
+
+#: extension.js:33
+msgid "Preferences"
+msgstr "选项"
+
+#: extension.js:40
+msgid "Open Dashboard"
+msgstr "打开控制台"
+
+#: extension.js:44
+msgid "Reload Configuration"
+msgstr "重载配置"
+
+#: extension.js:114 extension.js:116 extension.js:184
+msgid "Allow Lan: "
+msgstr "允许局域网连接："
+
+#: extension.js:124 extension.js:125
+msgid "Mode: "
+msgstr "模式："
+
+#: extension.js:141
+msgid "Failed to fetch configs, please check the status of mihomo service."
+msgstr "获取配置信息失败，请检查 Mihomo 服务状态"
+
+#: extension.js:168
+msgid "Proxy mode changed to"
+msgstr "代理模式已切换至 "
+
+#: extension.js:195
+msgid "Configuration reloded."
+msgstr "配置已重载"
+
+#: extension.js:199
+msgid "Failed to relod configuration."
+msgstr "重载配置失败"

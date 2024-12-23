@@ -1,0 +1,59 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-12-23 14:52+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: extension.js:20 extension.js:141 extension.js:168 extension.js:184
+#: extension.js:195 extension.js:199
+msgid "Mihomo Tray"
+msgstr ""
+
+#: extension.js:33
+msgid "Preferences"
+msgstr ""
+
+#: extension.js:40
+msgid "Open Dashboard"
+msgstr ""
+
+#: extension.js:44
+msgid "Reload Configuration"
+msgstr ""
+
+#: extension.js:114 extension.js:116 extension.js:184
+msgid "Allow Lan: "
+msgstr ""
+
+#: extension.js:124 extension.js:125
+msgid "Mode: "
+msgstr ""
+
+#: extension.js:141
+msgid "Failed to fetch configs, please check the status of mihomo service."
+msgstr ""
+
+#: extension.js:168
+msgid "Proxy mode changed to"
+msgstr ""
+
+#: extension.js:195
+msgid "Configuration reloded."
+msgstr ""
+
+#: extension.js:199
+msgid "Failed to relod configuration."
+msgstr ""

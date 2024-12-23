@@ -30,18 +30,18 @@ class Indicator extends PanelMenu.Button {
       })
     }
 
-    const prefItem = new PopupMenu.PopupMenuItem('Preferences')
+    const prefItem = new PopupMenu.PopupMenuItem(_('Preferences'))
     this._handlerId2 = prefItem.connect('activate', () => this.openPrefs())
     this.menu.addMenuItem(prefItem)
 
     const separator = new PopupMenu.PopupSeparatorMenuItem()
     this.menu.addMenuItem(separator)
 
-    const openMetacubeXDItem = new PopupMenu.PopupMenuItem('Open Dashboard')
+    const openMetacubeXDItem = new PopupMenu.PopupMenuItem(_('Open Dashboard'))
     this._handlerId3 = openMetacubeXDItem.connect('activate', () => this._openMetacubeXD())
     this.menu.addMenuItem(openMetacubeXDItem)
 
-    const reloadItem = new PopupMenu.PopupMenuItem('Reload Configuration')
+    const reloadItem = new PopupMenu.PopupMenuItem(_('Reload Configuration'))
     this._handlerId4 = reloadItem.connect('activate', () => this._reloadConfiguration())
     this.menu.addMenuItem(reloadItem)
 
@@ -111,9 +111,9 @@ class Indicator extends PanelMenu.Button {
         const items = []
 
         if (configs.hasOwnProperty('allow-lan')) {
-          this._allowLanItem = new PopupMenu.PopupMenuItem('Allow Lan: ' + (configs['allow-lan'] ? 'ON' : 'OFF'))
+          this._allowLanItem = new PopupMenu.PopupMenuItem(_('Allow Lan: ') + (configs['allow-lan'] ? 'ON' : 'OFF'))
           const onAllowLanChanged = value => {
-            this._allowLanItem.label.text = 'Allow Lan: ' + (value ? 'ON' : 'OFF')
+            this._allowLanItem.label.text = _('Allow Lan: ') + (value ? 'ON' : 'OFF')
             configs['allow-lan'] = value
           }
           this._handlerId5 = this._allowLanItem.connect('activate', () => this._changeAllowLan(!configs['allow-lan'], onAllowLanChanged))
@@ -121,8 +121,8 @@ class Indicator extends PanelMenu.Button {
         }
 
         if (configs.hasOwnProperty('mode')) {
-          const item = new PopupMenu.PopupSubMenuMenuItem('Mode: ' + configs['mode'].toUpperCase())
-          const onModeChanged = newMode => { item.label.text = 'Mode: ' + newMode.toUpperCase() }
+          const item = new PopupMenu.PopupSubMenuMenuItem(_('Mode: ') + configs['mode'].toUpperCase())
+          const onModeChanged = newMode => { item.label.text = _('Mode: ') + newMode.toUpperCase() }
           item.menu.addAction('GLOBAL', () => this._changeMode('Global', onModeChanged))
           item.menu.addAction('RULE', () => this._changeMode('Rule', onModeChanged))
           item.menu.addAction('DIRECT', () => this._changeMode('Direct', onModeChanged))
@@ -138,7 +138,7 @@ class Indicator extends PanelMenu.Button {
       },
       reject: err => {
         console.error(err)
-        Main.notify('Mihomo Tray', 'Failed to fetch configs, please check the status of mihomo service.')
+        Main.notify(_('Mihomo Tray'), _('Failed to fetch configs, please check the status of mihomo service.'))
       }
     })
   }
@@ -165,7 +165,7 @@ class Indicator extends PanelMenu.Button {
       url: `${this._externalController}/configs`,
       body: { mode },
       resolve: () => {
-        Main.notify('Mihomo Tray', `Proxy mode changed to ${mode}.`)
+        Main.notify(_('Mihomo Tray'), `${_('Proxy mode changed to')} ${mode}.`)
         onSuccess(mode)
       }
     })
@@ -181,7 +181,7 @@ class Indicator extends PanelMenu.Button {
       url: `${this._externalController}/configs`,
       body: { 'allow-lan': allowLan },
       resolve: () => {
-        Main.notify('Mihomo Tray', `Allow Lan: ${allowLan ? 'ON' : 'OFF'}`)
+        Main.notify(_('Mihomo Tray'), `${_('Allow Lan: ')}${allowLan ? 'ON' : 'OFF'}`)
         onSuccess(allowLan)
       }
     })
@@ -192,11 +192,11 @@ class Indicator extends PanelMenu.Button {
       method: 'PUT',
       url: `${this._externalController}/configs`,
       resolve: () => {
-        Main.notify('Mihomo Tray', `Configuration reloded.`)
+        Main.notify(_('Mihomo Tray'), _('Configuration reloded.'))
       },
       reject: (err) => {
         console.error(err)
-        Main.notify('Mihomo Tray', `Failed to relod configuration.`)
+        Main.notify(_('Mihomo Tray'), _('Failed to relod configuration.'))
       },
     })
   }
